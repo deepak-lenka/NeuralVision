@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Image Generator</h1>
+            <p class="subtitle">Transform your imagination into reality</p>
+        </div>
+
+        <div class="input-section">
+            <div class="prompt-container">
+                <textarea id="prompt" placeholder="Describe the image you want to create..."></textarea>
+                <div class="controls">
+                    <div class="number-input">
+                        <label for="num-images">Number of Images:</label>
+                        <select id="num-images">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <button id="generate-btn" onclick="generateImages()">
+                        <span class="btn-text">Generate</span>
+                        <div class="loader"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery" id="image-gallery">
+            <!-- Images will be added here -->
+        </div>
+
+        <div class="suggestions">
+            <h3>Try these prompts:</h3>
+            <div class="suggestion-chips">
+                <button onclick="usePrompt(this)">A cyberpunk cityscape at night</button>
+                <button onclick="usePrompt(this)">A magical forest with glowing butterflies</button>
+                <button onclick="usePrompt(this)">An astronaut riding a dragon in space</button>
+                <button onclick="usePrompt(this)">A futuristic car in a neon city</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
