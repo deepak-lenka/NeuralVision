@@ -205,11 +205,10 @@ button:hover {
 
 .image-container {
     position: relative;
-    background: var(--surface);
-    padding: 1rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -220,8 +219,49 @@ button:hover {
 .image-container img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
     display: block;
+}
+
+.download-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 12px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.download-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: #000;
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover .download-btn {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.download-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.05);
+}
+
+.download-btn:hover svg {
+    transform: translateY(2px);
 }
 
 .quick-prompts {
