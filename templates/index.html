@@ -5,32 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Image Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>AI Image Generator</h1>
-            <p class="subtitle">Transform your imagination into reality</p>
+            <h1>Neural<span class="accent">Vision</span></h1>
+            <p class="subtitle">Transform Your Imagination into Digital Reality</p>
         </div>
 
         <div class="input-section">
             <div class="prompt-container">
-                <textarea id="prompt" placeholder="Describe the image you want to create..."></textarea>
+                <textarea id="prompt" placeholder="Describe your vision here..."></textarea>
                 <div class="controls">
                     <div class="number-input">
-                        <label for="num-images">Number of Images:</label>
+                        <label for="num-images">Generate</label>
                         <select id="num-images">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            <option value="1">1 Image</option>
+                            <option value="2">2 Images</option>
+                            <option value="3">3 Images</option>
+                            <option value="4">4 Images</option>
                         </select>
                     </div>
                     <button id="generate-btn" onclick="generateImages()">
-                        <span class="btn-text">Generate</span>
+                        <span class="btn-text">Create</span>
                         <div class="loader"></div>
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="creative-prompts">
+            <h3>Explore Creative Dimensions</h3>
+            <div class="prompt-grid">
+                <div class="prompt-card cyberpunk" onclick="usePrompt(this)">
+                    "A bioluminescent cyberpunk metropolis where holographic dragons soar between crystalline skyscrapers, while cyber-augmented street artists create 3D neon murals that float in mid-air"
+                </div>
+                <div class="prompt-card nature" onclick="usePrompt(this)">
+                    "An ancient tree of life in a quantum realm, its branches holding different parallel universes, with ethereal beings made of starlight tending to cosmic gardens that grow constellation flowers"
+                </div>
+                <div class="prompt-card scifi" onclick="usePrompt(this)">
+                    "A steampunk space port on Mars where Victorian-era ships with solar sails dock alongside futuristic vessels, while robot merchants trade exotic crystals from Jupiter's moons"
+                </div>
+                <div class="prompt-card fantasy" onclick="usePrompt(this)">
+                    "An underwater city where merfolk architects design living coral buildings that pulse with bioluminescence, and schools of mechanical fish deliver messages through streams of bubbles"
+                </div>
+                <div class="prompt-card future" onclick="usePrompt(this)">
+                    "A floating zen garden in the stratosphere where AI monks meditate on clouds, surrounded by floating islands with gravity-defying waterfalls that flow upwards into space"
+                </div>
+                <div class="prompt-card abstract" onclick="usePrompt(this)">
+                    "A quantum art gallery where paintings shift through different dimensions, curated by holographic beings who weave reality into abstract masterpieces using threads of light and time"
                 </div>
             </div>
         </div>
@@ -39,17 +63,70 @@
             <!-- Images will be added here -->
         </div>
 
-        <div class="suggestions">
-            <h3>Try these prompts:</h3>
-            <div class="suggestion-chips">
-                <button onclick="usePrompt(this)">A cyberpunk cityscape at night</button>
-                <button onclick="usePrompt(this)">A magical forest with glowing butterflies</button>
-                <button onclick="usePrompt(this)">An astronaut riding a dragon in space</button>
-                <button onclick="usePrompt(this)">A futuristic car in a neon city</button>
+        <div class="quick-prompts">
+            <h3>Quick Inspiration</h3>
+            <div class="prompt-chips">
+                <button onclick="usePrompt(this)">Neon samurai in digital rain</button>
+                <button onclick="usePrompt(this)">Crystal cities in the clouds</button>
+                <button onclick="usePrompt(this)">Quantum butterfly effect</button>
+                <button onclick="usePrompt(this)">Cybernetic forest at dawn</button>
             </div>
         </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        function usePrompt(element) {
+            document.getElementById('prompt').value = element.textContent.trim();
+        }
+
+        async function generateImages() {
+            const prompt = document.getElementById('prompt').value;
+            const numImages = document.getElementById('num-images').value;
+            const button = document.getElementById('generate-btn');
+            const gallery = document.getElementById('image-gallery');
+
+            if (!prompt) {
+                alert('Please enter a prompt');
+                return;
+            }
+
+            button.classList.add('loading');
+            gallery.innerHTML = '';
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt, num_images: parseInt(numImages) })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to generate images');
+                }
+
+                const data = await response.json();
+                
+                data.images.forEach(filename => {
+                    const container = document.createElement('div');
+                    container.className = 'image-container';
+                    
+                    const img = document.createElement('img');
+                    img.src = `/temp_images/${filename}`; 
+                    img.alt = prompt;
+                    
+                    container.appendChild(img);
+                    gallery.appendChild(container);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to generate images. Please try again.');
+            } finally {
+                button.classList.remove('loading');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -20,7 +20,7 @@ async function generateImages() {
 
     try {
         console.log('Sending request with:', { prompt, numImages });
-        const response = await fetch('http://localhost:5011/generate', {
+        const response = await fetch('http://localhost:5013/generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

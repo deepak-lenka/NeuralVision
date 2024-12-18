@@ -1,49 +1,69 @@
-# Image Generator
+# NeuralVision
 
-A simple Python application that generates images using the Replicate API and Stable Diffusion model.
-
-## Setup
-
-1. Create a virtual environment and activate it:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use: venv\Scripts\activate
-```
-
-2. Install the required packages:
-```bash
-pip install -r requirements.txt
-```
-
-3. Create a `.env` file by copying `.env.example`:
-```bash
-cp .env.example .env
-```
-
-4. Get your Replicate API token from https://replicate.com and add it to the `.env` file:
-```
-REPLICATE_API_TOKEN=your_replicate_token_here
-```
-
-## Usage
-
-1. Run the application:
-```bash
-python main.py
-```
-
-2. Enter your prompt when asked. Be descriptive about what kind of image you want to generate.
-
-3. Choose how many images you want to generate (1-4).
-
-4. The generated images will be saved in the current directory as PNG files.
-
-5. Type 'quit' when you want to exit the program.
+A modern AI-powered image generation application that transforms textual descriptions into stunning visual artwork using state-of-the-art AI models.
 
 ## Features
 
-- Generate multiple images from a single prompt
-- Uses Stable Diffusion model via Replicate API
-- Simple command-line interface
-- Automatic image saving
-- Error handling and user feedback
+- 🎨 Generate unique images from text descriptions
+- 🖼️ Create multiple images in parallel
+- 💫 Modern, futuristic user interface
+- 🔄 Real-time image generation
+- 💡 Creative prompt suggestions
+
+## Technology Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Backend**: Python, Flask
+- **AI Model**: Replicate API (Flux model)
+- **Additional Libraries**: Flask-CORS, python-dotenv
+
+## Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/deepak-lenka/NeuralVision.git
+   cd NeuralVision
+   ```
+
+2. Create a virtual environment and activate it:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Create a `.env` file in the root directory and add your Replicate API key:
+   ```
+   REPLICATE_API_TOKEN=your_api_key_here
+   ```
+
+5. Run the application:
+   ```bash
+   python app.py
+   ```
+
+6. Open your browser and navigate to `http://localhost:5013`
+
+## Environment Variables
+
+- `REPLICATE_API_TOKEN`: Your Replicate API key (required)
+
+## Usage
+
+1. Enter a descriptive prompt in the text area
+2. Select the number of images you want to generate
+3. Click the "Create" button
+4. Wait for your images to be generated
+5. View and download your generated images
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
