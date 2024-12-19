@@ -56,36 +56,32 @@ body {
 }
 
 .input-section {
-    margin-bottom: 3rem;
-    background: var(--surface);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .prompt-container {
-    position: relative;
-}
-
-textarea {
     width: 100%;
-    height: 120px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    background: var(--surface-light);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    color: var(--text);
-    font-size: 1rem;
-    resize: vertical;
-    transition: all 0.3s ease;
 }
 
-textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(108, 99, 255, 0.2);
+#prompt {
+    width: 100%;
+    height: 150px;
+    padding: 20px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    resize: none;
+    transition: all 0.3s ease;
 }
 
 .controls {
@@ -212,6 +208,158 @@ select:focus {
     }
 }
 
+.generation-results {
+    margin: 60px auto;
+    padding: 40px 20px;
+    background: linear-gradient(to bottom, rgba(87, 75, 205, 0.05) 0%, rgba(87, 75, 205, 0.02) 100%);
+}
+
+.generation-status {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(87, 75, 205, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(87, 75, 205, 0.1);
+}
+
+.generation-status.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.status-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 10px;
+}
+
+.status-progress {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(87, 75, 205, 0.1);
+    border-top: 4px solid #574bcd;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.status-content {
+    flex-grow: 1;
+}
+
+.status-content h4 {
+    color: var(--text);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+}
+
+.status-text {
+    color: var(--text-secondary);
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.image-gallery:has(.image-container:only-child) {
+    max-width: 600px;
+    padding: 10px;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
+}
+
+.image-container:only-child {
+    max-width: 100%;
+    margin: 0;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover {
+    transform: translateY(-5px);
+}
+
+.image-container:hover img {
+    transform: scale(1.05);
+}
+
+@media (min-width: 769px) {
+    .image-gallery:has(.image-container:nth-child(3)) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.image-gallery:empty {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .image-gallery {
+        gap: 15px;
+        padding: 10px;
+    }
+    
+    .image-container {
+        aspect-ratio: 1;
+    }
+}
+
 .creative-prompts {
     margin: 3rem 0;
     padding: 2rem;
@@ -276,25 +424,6 @@ select:focus {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin: 3rem 0;
-}
-
-.image-container {
-    position: relative;
-    margin: 10px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.image-container:hover {
-    transform: translateY(-5px);
-}
-
-.image-container img {
-    width: 100%;
-    height: auto;
-    display: block;
 }
 
 .download-btn {
@@ -372,25 +501,77 @@ select:focus {
     transform: translateY(-2px);
 }
 
+.recent-creations {
+    background: linear-gradient(to bottom, rgba(87, 75, 205, 0.05), transparent);
+    padding: 60px 20px;
+    margin-top: 60px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h3 {
+    font-size: 32px;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.section-description {
+    color: var(--text-secondary);
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.showcase-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.showcase-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    aspect-ratio: 3/2;
+}
+
+.showcase-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.showcase-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.showcase-item:hover img {
+    transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
-    .container {
-        padding: 1rem;
+    .input-section {
+        margin: 20px auto;
+        padding: 20px;
     }
 
-    .header h1 {
-        font-size: 2.5rem;
+    .generation-results {
+        margin: 40px auto;
+        padding: 20px;
     }
 
-    .controls {
+    .status-card {
         flex-direction: column;
-    }
-
-    #generate-btn {
-        width: 100%;
-        padding: 16px 24px;
-    }
-
-    .prompt-grid {
-        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
     }
 }

@@ -16,7 +16,7 @@
 
         <div class="input-section">
             <div class="prompt-container">
-                <textarea id="prompt" placeholder="Describe your vision here..."></textarea>
+                <textarea id="prompt" placeholder="Describe your vision here..." style="height: 150px;"></textarea>
                 <div class="controls">
                     <div class="number-input">
                         <label for="num-images">Generate</label>
@@ -32,6 +32,25 @@
                         <div class="loader"></div>
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Generation Results Section -->
+        <div class="generation-results">
+            <div id="generation-status" class="generation-status">
+                <div class="status-card">
+                    <div class="status-progress">
+                        <div class="loading-spinner"></div>
+                    </div>
+                    <div class="status-content">
+                        <h4>Generated Results</h4>
+                        <p class="status-text">Your AI-generated masterpieces will appear here</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-container">
+                <div id="image-gallery" class="image-gallery"></div>
             </div>
         </div>
 
@@ -59,8 +78,15 @@
             </div>
         </div>
 
-        <div class="gallery" id="image-gallery">
-            <!-- Images will be added here -->
+        <!-- Recent Creations Section -->
+        <div class="recent-creations">
+            <div class="section-header">
+                <h3>Recent Creations</h3>
+                <p class="section-description">Explore the latest AI-generated masterpieces</p>
+            </div>
+            <div class="showcase-grid" id="showcase-grid">
+                <!-- Showcase images will be loaded here -->
+            </div>
         </div>
 
         <div class="quick-prompts">
@@ -76,6 +102,29 @@
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script>
+        // Load showcase images when the page loads
+        window.addEventListener('DOMContentLoaded', loadShowcaseImages);
+
+        function loadShowcaseImages() {
+            fetch('/get-showcase-images')
+                .then(response => response.json())
+                .then(data => {
+                    const showcaseGrid = document.getElementById('showcase-grid');
+                    data.images.slice(0, 6).forEach(filename => {
+                        const container = document.createElement('div');
+                        container.className = 'showcase-item';
+                        
+                        const img = document.createElement('img');
+                        img.src = `/temp_images/${filename}`;
+                        img.alt = 'AI Generated Art';
+                        
+                        container.appendChild(img);
+                        showcaseGrid.appendChild(container);
+                    });
+                })
+                .catch(error => console.error('Error loading showcase images:', error));
+        }
+
         function usePrompt(element) {
             document.getElementById('prompt').value = element.textContent.trim();
         }
@@ -85,6 +134,7 @@
             const numImages = document.getElementById('num-images').value;
             const button = document.getElementById('generate-btn');
             const gallery = document.getElementById('image-gallery');
+            const generationStatus = document.getElementById('generation-status');
 
             if (!prompt) {
                 alert('Please enter a prompt');
@@ -92,6 +142,7 @@
             }
 
             button.classList.add('loading');
+            generationStatus.classList.add('active');
             gallery.innerHTML = '';
 
             try {
@@ -120,7 +171,7 @@
                     const downloadBtn = document.createElement('a');
                     downloadBtn.href = `/download/${filename}`;
                     downloadBtn.className = 'download-btn';
-                    downloadBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
+                    downloadBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>';
                     downloadBtn.download = filename;
                     
                     container.appendChild(img);
@@ -132,6 +183,7 @@
                 alert('Failed to generate images. Please try again.');
             } finally {
                 button.classList.remove('loading');
+                generationStatus.classList.remove('active');
             }
         }
     </script>

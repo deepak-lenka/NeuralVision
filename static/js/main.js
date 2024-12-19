@@ -2,82 +2,67 @@ function usePrompt(element) {
     document.getElementById('prompt').value = element.textContent;
 }
 
+function updateProgress(percentage) {
+    const circle = document.querySelector('.progress-ring-circle');
+    const percentageText = document.querySelector('.percentage');
+    const circumference = 2 * Math.PI * 54; // r=54 from the SVG
+
+    // Update circle progress
+    const offset = circumference - (percentage / 100 * circumference);
+    circle.style.strokeDashoffset = offset;
+
+    // Update percentage text
+    percentageText.textContent = `${Math.round(percentage)}%`;
+}
+
 async function generateImages() {
     const prompt = document.getElementById('prompt').value;
     const numImages = document.getElementById('num-images').value;
     const generateBtn = document.getElementById('generate-btn');
+    const status = document.getElementById('generation-status');
     const gallery = document.getElementById('image-gallery');
 
-    if (!prompt) {
-        alert('Please enter a prompt');
-        return;
-    }
+    if (!prompt) return;
 
-    // Clear previous images and show loading state
-    gallery.innerHTML = '';
+    // Show loading state
     generateBtn.classList.add('loading');
-    generateBtn.disabled = true;
+    status.classList.add('active');
+    gallery.innerHTML = '';
 
     try {
-        console.log('Sending request with:', { prompt, numImages });
-        const response = await fetch('http://localhost:5013/generate', {
+        const response = await fetch('/generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                prompt: prompt,
-                num_images: parseInt(numImages)
-            })
+            body: JSON.stringify({ prompt, num_images: parseInt(numImages) })
         });
 
         const data = await response.json();
-        console.log('Server response:', data);
 
-        if (!response.ok) {
-            throw new Error(data.error || 'Failed to generate images');
+        if (data.images) {
+            setTimeout(() => {
+                status.classList.remove('active');
+                data.images.forEach(imagePath => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.className = 'image-container';
+                    
+                    const img = document.createElement('img');
+                    img.src = imagePath;
+                    img.alt = prompt;
+                    
+                    imgContainer.appendChild(img);
+                    gallery.appendChild(imgContainer);
+                });
+            }, 500);
         }
-
-        if (data.error) {
-            throw new Error(data.error);
-        }
-
-        // Clear gallery before adding new images
-        gallery.innerHTML = '';
-
-        // Add each image to the gallery
-        data.images.forEach(filename => {
-            const imgContainer = document.createElement('div');
-            imgContainer.className = 'image-container';
-
-            const img = document.createElement('img');
-            img.src = `/temp_images/${filename}`;
-            img.alt = prompt;
-            img.onerror = () => {
-                console.error('Failed to load image:', filename);
-                img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><text x="50%" y="50%" text-anchor="middle" fill="red">Error loading image</text></svg>';
-            };
-            
-            const downloadBtn = document.createElement('button');
-            downloadBtn.className = 'download-btn';
-            downloadBtn.textContent = 'Download';
-            downloadBtn.onclick = () => {
-                window.location.href = `/download/${filename}`;
-            };
-
-            imgContainer.appendChild(img);
-            imgContainer.appendChild(downloadBtn);
-            gallery.appendChild(imgContainer);
-        });
-
     } catch (error) {
-        console.error('Error details:', error);
-        alert('Error: ' + error.message);
-        gallery.innerHTML = `<div class="error-message">Error: ${error.message}</div>`;
+        console.error('Error:', error);
+        setTimeout(() => {
+            status.classList.remove('active');
+        }, 500);
     } finally {
-        // Reset button state
         generateBtn.classList.remove('loading');
-        generateBtn.disabled = false;
     }
 }
 

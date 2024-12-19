@@ -147,6 +147,17 @@ def generate_image():
             'error': str(e)
         }), 500
 
+@app.route('/get-showcase-images')
+def get_showcase_images():
+    try:
+        # Get list of all images in temp_images directory
+        image_files = [f for f in os.listdir(TEMP_DIR) if f.endswith('.png')]
+        # Sort by creation time, newest first
+        image_files.sort(key=lambda x: os.path.getctime(os.path.join(TEMP_DIR, x)), reverse=True)
+        return jsonify({'images': image_files})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/temp_images/<path:filename>')
 def serve_image(filename):
     return send_from_directory(TEMP_DIR, filename)
