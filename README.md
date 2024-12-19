@@ -52,14 +52,6 @@ A modern AI-powered image generation application that transforms textual descrip
 
 - `REPLICATE_API_TOKEN`: Your Replicate API key (required)
 
-## Usage
-
-1. Enter a descriptive prompt in the text area
-2. Select the number of images you want to generate
-3. Click the "Create" button
-4. Wait for your images to be generated
-5. View and download your generated images
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
