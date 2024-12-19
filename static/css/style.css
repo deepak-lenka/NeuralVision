@@ -291,7 +291,6 @@ select:focus {
 
 .image-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     padding: 15px;
     background: rgba(255, 255, 255, 0.05);
@@ -303,9 +302,19 @@ select:focus {
     margin: 0 auto;
 }
 
+.image-gallery:has(.image-container:nth-child(2)) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
 .image-gallery:has(.image-container:only-child) {
+    grid-template-columns: 1fr;
     max-width: 600px;
     padding: 10px;
+}
+
+.image-gallery:has(.image-container:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 1000px;
 }
 
 .image-container {
