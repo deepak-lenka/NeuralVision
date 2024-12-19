@@ -738,3 +738,95 @@ select:focus {
         font-size: 24px;
     }
 }
+
+/* Social Links Section */
+.social-links-section {
+    margin: 60px auto;
+    text-align: center;
+    max-width: 800px;
+}
+
+.social-links-section h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #574bcd, #9089fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.social-link svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* GitHub */
+.social-link.github:hover {
+    background: #24292e;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Instagram */
+.social-link.instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(220, 39, 67, 0.2);
+}
+
+/* X (Twitter) */
+.social-link.x-twitter:hover {
+    background: #000;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .social-links-section {
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .social-links-section h2 {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+
+    .social-links {
+        gap: 20px;
+    }
+
+    .social-link {
+        width: 45px;
+        height: 45px;
+    }
+
+    .social-link svg {
+        width: 20px;
+        height: 20px;
+    }
+}
