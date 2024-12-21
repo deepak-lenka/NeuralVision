@@ -54,4 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
             loadImages();
         }
     });
+
+    // Scroll Progress Bar
+    function updateScrollProgress() {
+        const scrollProgress = document.querySelector('.scroll-progress-bar');
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / scrollHeight) * 100;
+        scrollProgress.style.height = `${scrolled}%`;
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', updateScrollProgress);
+    window.addEventListener('resize', updateScrollProgress);
+
+    // Initial progress update
+    updateScrollProgress();
 });
