@@ -155,31 +155,40 @@ def generate_image():
 
 @app.route('/api/gallery')
 def get_gallery_images():
-    page = int(request.args.get('page', 1))
-    per_page = 12
-    start = (page - 1) * per_page
-    
-    # Get all image files from the output directory
-    image_files = []
-    for ext in ['*.png', '*.jpg', '*.jpeg']:
-        image_files.extend(glob.glob(os.path.join(TEMP_DIR, ext)))
-    
-    # Sort by creation time, newest first
-    image_files.sort(key=os.path.getctime, reverse=True)
-    
-    # Paginate results
-    paginated_files = image_files[start:start + per_page]
-    
-    images = []
-    for file in paginated_files:
-        created_at = datetime.fromtimestamp(os.path.getctime(file))
-        images.append({
-            'path': f'/temp_images/{os.path.basename(file)}',
-            'created_at': created_at.isoformat(),
-            'prompt': 'AI Generated Image'  # You can store and retrieve actual prompts if needed
+    try:
+        page = int(request.args.get('page', 1))
+        per_page = 12
+        start = (page - 1) * per_page
+        
+        # Get all image files from the temp directory
+        image_files = []
+        for ext in ['*.png', '*.jpg', '*.jpeg']:
+            image_files.extend(glob.glob(os.path.join(TEMP_DIR, ext)))
+        
+        # Sort by creation time, newest first
+        image_files.sort(key=os.path.getctime, reverse=True)
+        
+        # Paginate results
+        paginated_files = image_files[start:start + per_page]
+        
+        images = []
+        for file in paginated_files:
+            created_at = datetime.fromtimestamp(os.path.getctime(file))
+            images.append({
+                'path': f'/temp_images/{os.path.basename(file)}',
+                'created_at': created_at.isoformat(),
+                'prompt': 'AI Generated Image'  # You can store and retrieve actual prompts if needed
+            })
+        
+        return jsonify({
+            'images': images,
+            'total': len(image_files),
+            'page': page,
+            'per_page': per_page
         })
-    
-    return jsonify({'images': images})
+    except Exception as e:
+        print(f"Error in gallery API: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/get-showcase-images')
 def get_showcase_images():
