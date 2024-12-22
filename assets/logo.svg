@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .node {
+            fill: #6c63ff;
+            animation: pulse 2s infinite;
+        }
+        .connection {
+            stroke: #6c63ff;
+            stroke-width: 2;
+            opacity: 0.6;
+            animation: flow 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.5; r: 6; }
+            50% { opacity: 1; r: 8; }
+            100% { opacity: 0.5; r: 6; }
+        }
+        @keyframes flow {
+            0% {
+                stroke-dasharray: 0, 30;
+                stroke-dashoffset: 0;
+            }
+            50% {
+                stroke-dasharray: 30, 30;
+                stroke-dashoffset: -30;
+            }
+            100% {
+                stroke-dasharray: 30, 30;
+                stroke-dashoffset: -60;
+            }
+        }
+        .node:nth-child(2) { animation-delay: 0.2s; }
+        .node:nth-child(3) { animation-delay: 0.4s; }
+        .node:nth-child(4) { animation-delay: 0.6s; }
+        .node:nth-child(5) { animation-delay: 0.8s; }
+        .node:nth-child(6) { animation-delay: 1s; }
+        .connection:nth-child(7) { animation-delay: 0.1s; }
+        .connection:nth-child(8) { animation-delay: 0.2s; }
+        .connection:nth-child(9) { animation-delay: 0.3s; }
+        .connection:nth-child(10) { animation-delay: 0.4s; }
+        .connection:nth-child(11) { animation-delay: 0.5s; }
+        .connection:nth-child(12) { animation-delay: 0.6s; }
+        .connection:nth-child(13) { animation-delay: 0.7s; }
+        .connection:nth-child(14) { animation-delay: 0.8s; }
+    </style>
+    
+    <!-- Nodes -->
+    <circle class="node" cx="30" cy="30" r="6"/>
+    <circle class="node" cx="30" cy="60" r="6"/>
+    <circle class="node" cx="30" cy="90" r="6"/>
+    
+    <circle class="node" cx="60" cy="45" r="6"/>
+    <circle class="node" cx="60" cy="75" r="6"/>
+    
+    <circle class="node" cx="90" cy="60" r="6"/>
+    
+    <!-- Connections -->
+    <line class="connection" x1="30" y1="30" x2="60" y2="45"/>
+    <line class="connection" x1="30" y1="30" x2="60" y2="75"/>
+    <line class="connection" x1="30" y1="60" x2="60" y2="45"/>
+    <line class="connection" x1="30" y1="60" x2="60" y2="75"/>
+    <line class="connection" x1="30" y1="90" x2="60" y2="45"/>
+    <line class="connection" x1="30" y1="90" x2="60" y2="75"/>
+    
+    <line class="connection" x1="60" y1="45" x2="90" y2="60"/>
+    <line class="connection" x1="60" y1="75" x2="90" y2="60"/>
+</svg>

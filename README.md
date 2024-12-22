@@ -1,5 +1,10 @@
 # NeuralVision 🎨
 
+<div align="center">
+  <img src="assets/logo.svg" alt="NeuralVision Logo" width="180" height="180">
+  <h1>Neural<span style="color: #6c63ff">Vision</span></h1>
+</div>
+
 A cutting-edge AI-powered image generation platform that transforms your imagination into stunning visual artwork using state-of-the-art AI models. Experience the future of creative expression with our modern, intuitive interface.
 
 ## ✨ Features
