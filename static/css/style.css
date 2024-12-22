@@ -964,19 +964,22 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 20px;
 }
 
 .nav-link {
     color: #ffffff;
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-size: 16px;
+    transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-    color: var(--accent);
+    color: var(--primary);
+}
+
+.nav-link.active {
+    color: var(--primary);
 }
 
 .header {
@@ -1031,17 +1034,36 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.input-section textarea {
+.prompt-input {
     width: 100%;
-    min-height: 150px;
-    background: rgba(32, 33, 35, 0.8);
-    border: none;
-    border-radius: 16px;
-    color: rgba(255, 255, 255, 0.9);
-    padding: 16px;
-    margin-bottom: 20px;
+    min-height: 120px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    color: #ffffff;
+    font-family: inherit;
+    margin-bottom: 12px;
     resize: none;
     font-size: 16px;
+}
+
+.controls-container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.main-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 20px 20px;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 24px;
 }
 
 /* Neural Network Animation */
