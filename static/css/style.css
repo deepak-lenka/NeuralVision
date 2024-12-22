@@ -940,14 +940,12 @@ body {
 }
 
 .logo-link {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: inherit;
-    display: inline-block;
     transition: opacity 0.2s ease;
-}
-
-.logo-link:hover {
-    opacity: 0.9;
+    gap: 4px;
 }
 
 .nav-logo h1 {
@@ -957,6 +955,7 @@ body {
     font-weight: 700;
     color: #ffffff;
     letter-spacing: 0.5px;
+    line-height: 1;
 }
 
 .nav-logo .accent {
@@ -1043,4 +1042,96 @@ body {
     margin-bottom: 20px;
     resize: none;
     font-size: 16px;
+}
+
+/* Neural Network Animation */
+.neural-network-animation {
+    margin-right: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.neural-network-animation svg {
+    width: 26px;
+    height: 26px;
+    overflow: visible;
+    position: relative;
+    top: 1px;
+}
+
+.neural-network-animation .node {
+    fill: var(--primary);
+    r: 3;
+    animation: pulse 2s infinite;
+}
+
+.neural-network-animation .connection {
+    stroke: var(--primary);
+    stroke-width: 1;
+    opacity: 0.6;
+    animation: flow 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+        r: 3;
+    }
+    50% {
+        opacity: 1;
+        r: 4;
+    }
+    100% {
+        opacity: 0.5;
+        r: 3;
+    }
+}
+
+@keyframes flow {
+    0% {
+        stroke-dasharray: 0, 15;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 15, 15;
+        stroke-dashoffset: -15;
+    }
+    100% {
+        stroke-dasharray: 15, 15;
+        stroke-dashoffset: -30;
+    }
+}
+
+/* Delay animations for different nodes */
+.neural-network-animation .node:nth-child(2) { animation-delay: 0.2s; }
+.neural-network-animation .node:nth-child(3) { animation-delay: 0.4s; }
+.neural-network-animation .node:nth-child(4) { animation-delay: 0.6s; }
+.neural-network-animation .node:nth-child(5) { animation-delay: 0.8s; }
+.neural-network-animation .node:nth-child(6) { animation-delay: 1s; }
+
+/* Delay animations for different connections */
+.neural-network-animation .connection:nth-child(7) { animation-delay: 0.1s; }
+.neural-network-animation .connection:nth-child(8) { animation-delay: 0.2s; }
+.neural-network-animation .connection:nth-child(9) { animation-delay: 0.3s; }
+.neural-network-animation .connection:nth-child(10) { animation-delay: 0.4s; }
+.neural-network-animation .connection:nth-child(11) { animation-delay: 0.5s; }
+.neural-network-animation .connection:nth-child(12) { animation-delay: 0.6s; }
+.neural-network-animation .connection:nth-child(13) { animation-delay: 0.7s; }
+.neural-network-animation .connection:nth-child(14) { animation-delay: 0.8s; }
+
+/* Update logo link to include animation */
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+}
+
+.logo-link:hover .neural-network-animation .node {
+    animation-duration: 1.5s;
+}
+
+.logo-link:hover .neural-network-animation .connection {
+    animation-duration: 1.5s;
 }
