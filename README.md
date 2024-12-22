@@ -1,10 +1,10 @@
 # NeuralVision 🎨
 
-<div align="center">
-  <div style="display: flex; align-items: center; justify-content: center; gap: 4px;">
-    <img src="assets/logo.svg" alt="NeuralVision Logo" width="180" height="180">
+<div align="center" style="background-color: #0a0a0a; padding: 20px;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+    <img src="assets/logo.svg" alt="NeuralVision Logo" width="32" height="32" style="margin-right: 4px;">
+    <h1 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 700; margin: 0; color: white; display: flex; align-items: center;">Neural<span style="background: linear-gradient(45deg, #6c63ff, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Vision</span></h1>
   </div>
-  <h1 style="font-family: 'Orbitron', sans-serif; font-size: 48px; font-weight: 700; margin: 0; letter-spacing: 0.5px;">Neural<span style="color: #6c63ff">Vision</span></h1>
 </div>
 
 A cutting-edge AI-powered image generation platform that transforms your imagination into stunning visual artwork using state-of-the-art AI models. Experience the future of creative expression with our modern, intuitive interface.
