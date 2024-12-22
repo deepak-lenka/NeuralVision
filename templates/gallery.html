@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Creations - NeuralVision</title>
+    <title>Creations - NeuralVision</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <a href="/" class="logo-link">
+                <h1>Neural<span class="accent">Vision</span></h1>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Create</a>
+            <a href="/#about" class="nav-link">About</a>
+        </div>
+    </nav>
     <div class="scroll-progress-container">
         <div class="scroll-progress-bar"></div>
     </div>
     <div class="container">
-        <nav class="gallery-nav">
-            <a href="/" class="back-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Back to Generator
-            </a>
-            <h1>Your Creations</h1>
-        </nav>
-
         <div class="gallery-container">
             <div class="gallery-grid" id="gallery-grid">
                 <!-- Images will be loaded here -->

@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Image Generator</title>
+    <title>NeuralVision - AI Image Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <a href="/" class="logo-link">
+                <h1>Neural<span class="accent">Vision</span></h1>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="/gallery" class="nav-link">Creations</a>
+            <a href="#about" class="nav-link">About</a>
+        </div>
+    </nav>
     <div class="container">
-        <div class="header">
-            <h1>Neural<span class="accent">Vision</span></h1>
-            <p class="subtitle">Transform Your Imagination into Digital Reality</p>
+        <div class="hero-section">
+            <h1 class="hero-title">Transform Your Imagination into Digital Reality</h1>
         </div>
 
         <div class="input-section">
@@ -89,7 +99,7 @@
             </div>
         </div>
 
-        <div class="social-links-section">
+        <div class="social-links-section" id="about">
             <h2>About Me</h2>
             <div class="social-links">
                 <a href="https://github.com/deepak-lenka" class="social-link github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
