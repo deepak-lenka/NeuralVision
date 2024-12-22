@@ -3,7 +3,7 @@
 <div align="center" style="background-color: #0a0a0a; padding: 20px;">
   <div style="display: inline-flex; align-items: center; gap: 12px;">
     <img src="assets/logo.svg" alt="NeuralVision Logo" width="180" height="180">
-    <h1 style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 42px; font-weight: 600; margin: 0; color: white; display: flex;">Neural<span style="background: linear-gradient(to right, #6c63ff 20%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Vision</span></h1>
+    <h1 style="font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 700; margin: 0; color: #ffffff; letter-spacing: 0.5px; line-height: 1;">Neural<span style="color: #6c63ff">Vision</span></h1>
   </div>
 </div>
 
