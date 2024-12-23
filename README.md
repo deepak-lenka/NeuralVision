@@ -16,24 +16,39 @@ A cutting-edge AI-powered image generation platform that transforms your imagina
 - 💫 Modern, intuitive interface
 - 💡 Creative prompt suggestions
 
-## 🚀 Quick Start
+## 🚀 Setup Guide
 
-1. **Clone and Install**
+1. **Clone the Repository**
    ```bash
    git clone https://github.com/deepak-lenka/NeuralVision.git
    cd NeuralVision
-   pip install -r requirements.txt
    ```
 
-2. **Set Up Environment**
+2. **Set Up Virtual Environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   pip install flask python-dotenv requests openai
+   ```
+
+4. **Configure Environment**
+   Create a `.env` file:
    ```env
    REPLICATE_API_TOKEN=your_api_key_here
+   PORT=5013  # Optional, defaults to 5013
    ```
 
-3. **Run**
+5. **Run the Application**
    ```bash
    python app.py
    ```
+
+6. **Access the Application**
+   Open `http://localhost:5013` in your browser
 
 ---
 Created with ❤️ by Deepak Lenka
