@@ -44,22 +44,13 @@ def generate_single_image(prompt, index):
         }
 
         print(f"Creating prediction with model input: {model_input}")
-        prediction = replicate.predictions.create(
-            model="black-forest-labs/flux-1.1-pro-ultra",
+        prediction = replicate.run(
+            "black-forest-labs/flux-1.1-pro-ultra",
             input=model_input
         )
 
-        print(f"Waiting for prediction {index + 1} to complete...")
-        while prediction.status not in ["succeeded", "failed", "canceled"]:
-            time.sleep(1)
-            prediction.reload()
-            print(f"Prediction {index + 1} status: {prediction.status}")
-
-        if prediction.status == "succeeded":
-            print(f"Prediction {index + 1} succeeded. Output: {prediction.output}")
-            return prediction.output
-        else:
-            raise Exception(f"Prediction failed with status: {prediction.status}")
+        print(f"Prediction {index + 1} succeeded. Output: {prediction}")
+        return prediction
 
     except Exception as e:
         print(f"Error generating single image: {str(e)}")
